@@ -2,6 +2,8 @@ package com.springboot.Hello.Controller;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,14 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.Hello.Dto.MemberDto;
 
+
+
 @RestController
 // class 수준에서 @requestMapping을 설정하면 내부에 선언한 메소드의 URL 리소스 앞에 @requestMapping의 값이 공통 값으로 추가됨
 @RequestMapping("/api/v1/get-api")
 public class GetController {
-
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(GetController.class);
+	
 	// http://localhost:8080/api/v1/get-api/hello
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String getHello() {
+		LOGGER.info("getHello 메서드가 호출되었습니다.");
 		return "GET Hello World";
 	}
 	// http://localhost:8080/api/v1/get-api/name
@@ -33,6 +40,7 @@ public class GetController {
 	public String getVariable1(@PathVariable String variable) {
 		// @PathVariable은 URL에 값을 담아 전달되는 요청을 처리하는 방법을 보여줍니다.
 		// @getMapping 어노테이션과 @pathVariable에 지정된 변수의 이름을 동일하게 맞춰야 합니다.
+		LOGGER.info("getVariable1 메서드가 호출되었습니다. {}", variable); // {} 중괄호를 사용하면 포매팅을 통해 로그메시지가 구성됨
 		return variable;
 	}
 

@@ -1,11 +1,15 @@
 package com.springboot.Hello.Controller;
 
+import java.lang.reflect.Member;
 import java.util.Map;
 
-
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.Hello.Dto.MemberDto;
@@ -40,5 +44,12 @@ public class PutController {
 	/*
 	 * spring framework has HttpEntity
 	 * RequestEntity and ResponseEntity extends HttpEntity
+	 * RequestEntity, ResponseEntity
+	 * 이 클래스를 활용하면 응답 코드 변경은 물론 Header와 body를 더욱 쉽게 구성할 수 있습니다.
+	 * 
 	 *  */
+	@PutMapping("/member3")
+	public ResponseEntity<MemberDto> postMemberDto3(@RequestBody MemberDto memberDto){
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(memberDto); // HttpStatus.ACCEPTED ==> 응답코드가 202으로 변함 
+	}
 }
